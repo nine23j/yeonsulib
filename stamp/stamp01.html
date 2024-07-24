@@ -1,0 +1,53 @@
+<?php
+    include($_SERVER["DOCUMENT_ROOT"]."/inc/common.php");
+?>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <title>우리 동네 도서관 & 서점 e스탬프 투어</title>
+    <script src="jsQR.js"></script>
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-rwdImageMaps/1.6/jquery.rwdImageMaps.min.js"></script>
+    <script src="jquery.cookie.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Ropa+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="main.css?v=2023092111">
+</head>
+<body>
+    <div style="text-align: center;">
+    <!--<div class="backgroundImg1"></div>-->
+        <img src="img/001.jpg" usemap="#image-map" style="width: 100%;">
+<?php
+    session_start();
+    if (isset($_SESSION['nickname'])) {
+?>
+        <div style="position: absolute; top: 2%; left: 5%;">
+            <p style="font-size: 14px; background: #0d67ab; padding: 10px; border-radius: 5px;"><a style="text-decoration: none; color: #fff;" href="logoutProc.php">로그아웃</p>
+<?php
+    } else {
+?>
+        <div style="position: absolute; top: 2%; left: 5%;">
+            <p style="font-size: 14px; background: #0d67ab; padding: 10px; border-radius: 5px;"><a style="text-decoration: none; color: #fff;" href="login.html">로그인</a></p>
+<?php
+    }
+?>
+        </div>
+        <map name="image-map">
+            <area target="_self" alt="" title="" href="stamp03.html" coords="948,1098,508,979" shape="rect">
+            <area target="_self" alt="" title="" href="stamp02.html" coords="945,1479,507,1356" shape="rect">
+        </map>
+    </div>
+  <script>
+    /*if (document.location.protocol == 'http:') {
+        document.location.href = document.location.href.replace('http:', 'https:');
+    }*/
+    </script>
+</body>
+</html>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('img[usemap]').rwdImageMaps();
+    });
+</script>
