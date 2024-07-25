@@ -12,7 +12,7 @@
 
     $nickname = $_SESSION['nickname'];
 
-    $stmt = $conn->prepare("SELECT lib01, lib02, lib03, book01, book02 FROM userInfo WHERE nickname = ?");
+    $stmt = $conn->prepare("SELECT lib01, lib02, lib03, book01, book02, status FROM userInfo WHERE nickname = ?");
     if ($stmt === false) {
         die('Prepare failed: ' . $conn->error);
     }
