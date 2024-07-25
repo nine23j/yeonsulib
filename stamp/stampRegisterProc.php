@@ -14,14 +14,17 @@
 
     $lockPosition = $_POST['lockPosition'];
     $code = $_POST['code'];
-    $type;
+    $lockPositionType;
+    $$codeType;
 
     switch ($lockPosition) {
         case 'lib01':
         case 'lib02':
         case 'lib03':
+            $lockPositionType = 'lib';
         case 'book01':
         case 'book02':
+            $lockPositionType = 'book';
             break;
         default:
             echo "
@@ -36,7 +39,8 @@
     switch ($code) {
         case 'stamp01':
         case 'stamp02':
-            $type = 'book';
+            $codeType = 'book';
+            break;
         case 'stamp03':
         case 'stamp04':
         case 'stamp05':
@@ -52,7 +56,7 @@
         case 'stamp15':
         case 'stamp16':
         case 'stamp17':
-            $type = 'lib';
+            $codeType = 'lib';
             break;
         default:
             echo "
@@ -62,6 +66,23 @@
                 </script>";
 
             exit();
+    }
+
+    // 자물쇠 자리에 QR 스탬프가 알맞게 들어가는지 검증
+    if ($lockPositionType != $codeType) {
+        if ($lockPositionType == 'lib') {
+            echo "
+                <script>
+                    alert('해당 자물쇠는 도서관 스탬프만 등록가능합니다.');
+                    location.href='stamp02.html';
+                </script>";
+        } else if ($lockPositionType == 'book') {
+            echo "
+                <script>
+                    alert('해당 자물쇠는 서점 스탬프만 등록가능합니다.');
+                    location.href='stamp02.html';
+                </script>";
+        }
     }
 
     $stmt = $conn->prepare("SELECT lib01, lib02, lib03, book01, book02 FROM userInfo WHERE nickname = ?");
