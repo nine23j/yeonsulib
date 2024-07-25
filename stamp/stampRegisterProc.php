@@ -22,6 +22,7 @@
         case 'lib02':
         case 'lib03':
             $lockPositionType = 'lib';
+            break;
         case 'book01':
         case 'book02':
             $lockPositionType = 'book';
