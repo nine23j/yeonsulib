@@ -1,0 +1,245 @@
+body {
+    background-color: #fffdee;
+    font-family: 'Ropa Sans', sans-serif;
+    font-size: 30px;
+    color: #333;
+    /*max-width: 640px;
+    margin: 0 auto;
+    position: relative;*/
+}
+
+.backgroundImg1 {
+    width: 100%;
+    height: 1920px;
+    background: url("img/001.jpg") no-repeat center;
+}
+
+.backgroundTop {
+    width: 100%;
+    height: 670px;
+    background: url("backgroundTop.jpg") no-repeat center;
+}
+
+.backgroundMiddle {
+    width: 100%;
+    height: 1437px;
+    background: url("backgroundMiddle.jpg") no-repeat center;
+}
+
+.cameraMent {
+    color: #f97600;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.elementContainer {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 1500px;
+}
+
+.element {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.elementImg {
+    width: 153px;
+    height: 193px;
+}
+
+#element1 {
+    position: absolute;
+    top: -400px;
+    left: -340px;
+    width: 140px;
+    height: 200px;
+}
+
+#element2 {
+    position: absolute;
+    top: -400px;
+    left: -160px;
+    width: 140px;
+    height: 200px;
+}
+
+#element3 {
+    position: absolute;
+    top: -400px;
+    left: 20px;
+    width: 140px;
+    height: 200px;
+}
+
+#element4 {
+    position: absolute;
+    top: -400px;
+    left: 200;
+    width: 140px;
+    height: 200px;
+}
+
+#element5 {
+    position: absolute;
+    top: -180px;
+    left: -340px;
+    width: 140px;
+    height: 200px;
+}
+
+#element6 {
+    position: absolute;
+    top: -180px;
+    left: -160px;
+    width: 140px;
+    height: 200px;
+}
+
+#element7 {
+    position: absolute;
+    top: -180px;
+    left: 20px;
+    width: 140px;
+    height: 200px;
+}
+
+#element8 {
+    position: absolute;
+    top: -180px;
+    left: 200px;
+    width: 140px;
+    height: 200px;
+}
+
+#element9 {
+    position: absolute;
+    top: 40px;
+    left: -340px;
+    width: 140px;
+    height: 200px;
+}
+
+#element10 {
+    position: absolute;
+    top: 40px;
+    left: -160px;
+    width: 140px;
+    height: 200px;
+}
+
+#element11 {
+    position: absolute;
+    top: 40px;
+    left: 20px;
+    width: 140px;
+    height: 200px;
+}
+
+#element12 {
+    position: absolute;
+    top: 40px;
+    left: 200px;
+    width: 140px;
+    height: 200px;
+}
+
+#element13 {
+    position: absolute;
+    top: 260px;
+    left: -340px;
+    width: 140px;
+    height: 200px;
+}
+
+#element14 {
+    position: absolute;
+    top: 260px;
+    left: -160px;
+    width: 140px;
+    height: 200px;
+}
+
+#element15 {
+    position: absolute;
+    top: 260px;
+    left: 20px;
+    width: 140px;
+    height: 200px;
+}
+
+#element16 {
+    position: absolute;
+    top: 260px;
+    left: 200px;
+    width: 140px;
+    height: 200px;
+}
+
+.canvasContainer {
+    margin: 30px 0 5px;
+    text-align: center;
+}
+
+#canvas {
+    max-width: 1000px;
+}
+
+#cameraMent {
+  margin: 80px;
+  padding: 5px;
+  line-height: 80px;
+  font-size: 40px;
+  background: #febf00;
+}
+
+#cameraMent.vibration {
+  animation: vibration .1s infinite;
+}
+
+@keyframes vibration {
+  from {
+    transform: rotate(1deg);
+  }
+  to {
+    transform: rotate(-1deg);
+  }
+}
+
+    #githubLink {
+      position: absolute;
+      right: 0;
+      top: 12px;
+      color: #2D99FF;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 40px;
+    }
+
+    #loadingMessage {
+      text-align: center;
+      padding: 40px;
+      background-color: #eee;
+    }
+
+    #output {
+      margin-top: 20px;
+      background: #eee;
+      padding: 10px;
+      padding-bottom: 0;
+    }
+
+    #output div {
+      padding-bottom: 10px;
+      word-wrap: break-word;
+    }
+
+    #noQRFound {
+      text-align: center;
+    }
