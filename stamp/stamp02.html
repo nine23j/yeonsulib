@@ -1,0 +1,85 @@
+<?php
+    include($_SERVER["DOCUMENT_ROOT"]."/inc/common.php");
+    include($_SERVER["DOCUMENT_ROOT"]."/stamp/stamp.php");
+?>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <title>우리 동네 도서관 & 서점 e스탬프 투어</title>
+    <script src="jsQR.js"></script>
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-rwdImageMaps/1.6/jquery.rwdImageMaps.min.js"></script>
+    <script src="jquery.cookie.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Ropa+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="main.css?v=2023092111">
+</head>
+<body>
+    <div style="position: relative; text-align: center;">
+    <!--<div class="backgroundImg1"></div>-->
+        <img src="img/002.jpg" usemap="#image-map" style="width: 100%;">
+<?php
+    if ($stampLib01) {
+?>
+        <img src="img/stamp/<?php echo $stampLib01 ?>.png" style="position: absolute; top: 30%; left: 9%; width: 20%;">
+<?php
+    }
+?>
+<?php
+    if ($stampLib02) {
+?>
+        <img src="img/stamp/<?php echo $stampLib02 ?>.png" style="position: absolute; top: 30%; left: 72%; width: 20%;">
+<?php
+    }
+?>
+<?php
+    if ($stampLib03) {
+?>
+        <img src="img/stamp/<?php echo $stampLib03 ?>.png" style="position: absolute; top: 55%; left: 46%; width: 20%;">
+<?php
+    }
+?>
+<?php
+    if ($stampBook01) {
+?>
+        <img src="img/stamp/<?php echo $stampBook01 ?>.png" style="position: absolute; top: 83%; left: 9%; width: 20%;">
+<?php
+    }
+?>
+<?php
+    if ($stampBook02) {
+?>
+        <img src="img/stamp/<?php echo $stampBook02 ?>.png" style="position: absolute; top: 83%; left: 71%; width: 20%;">
+<?php
+    }
+?>
+        <map name="image-map">
+            <area target="_self" href="index.html" coords="39,54,120,137" shape="rect">
+            <area id="confirmGiftBtn" coords="1041,428,909,359" shape="rect">
+            <area target="_self" href="qr.html?lockPosition=lib01" coords="152,628,233,716" shape="rect">
+            <area target="_self" href="qr.html?lockPosition=lib02" coords="844,627,923,717" shape="rect">
+            <area target="_self" href="qr.html?lockPosition=lib03" coords="555,1107,642,1203" shape="rect">
+            <area target="_self" href="qr.html?lockPosition=book01" coords="167,1664,243,1749" shape="rect">
+            <area target="_self" href="qr.html?lockPosition=book02" coords="811,1663,900,1757" shape="rect">
+        </map>
+    </div>
+  <script>
+    if (document.location.protocol == 'http:') {
+        document.location.href = document.location.href.replace('http:', 'https:');
+    }
+    </script>
+</body>
+</html>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('img[usemap]').rwdImageMaps();
+    });
+
+    $('#confirmGiftBtn').click(function() {
+        if (confirm('관리자가 아닌 경우 취소해주세요.\n\n선물을 받은걸로 수령확인하시겠습니까?')) {
+            location.href="confirmGift.php";
+        }
+    });
+</script>
