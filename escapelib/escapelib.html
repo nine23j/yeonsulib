@@ -1,0 +1,36 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <title>일회용도서관을 탈출하라</title>
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-rwdImageMaps/1.6/jquery.rwdImageMaps.min.js"></script>
+    <script src="jquery.cookie.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Ropa+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="main.css?v=2023092111">
+</head>
+<body>
+    <div style="text-align: center;">
+        <img src="img/introduce/004.jpg" usemap="#image-map" style="width: 100%;" />
+        <map name="image-map">
+            <area target="_self" alt="" title="" href="qr.html?qrPosition=784407522147" coords="147,522,407,784" shape="rect">
+            <area target="_self" alt="" title="" href="qr.html?qrPosition=784860523599" coords="599,523,860,784" shape="rect">
+            <area target="_self" alt="" title="" href="qr.html?qrPosition=1167860906599" coords="599,906,860,1167" shape="rect">
+            <area target="_self" alt="" title="" href="qr.html?qrPosition=1167408906147" coords="147,906,408,1167" shape="rect">
+            <area target="_self" alt="" title="" href="qr.html?qrPosition=15504071289147" coords="147,1289,407,1550" shape="rect">
+            <area target="_self" alt="" title="" href="qr.html?qrPosition=15508601288599" coords="599,1288,860,1550" shape="rect">
+        </map>
+    </div>
+  <script>
+    /*if (document.location.protocol == 'http:') {
+        document.location.href = document.location.href.replace('http:', 'https:');
+    }*/
+    </script>
+</body>
+</html>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('img[usemap]').rwdImageMaps();
+    });
+</script>

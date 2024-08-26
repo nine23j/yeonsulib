@@ -1,0 +1,36 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <title>일회용도서관을 탈출하라</title>
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-rwdImageMaps/1.6/jquery.rwdImageMaps.min.js"></script>
+    <script src="jquery.cookie.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Ropa+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="main.css?v=2023092111">
+</head>
+<body>
+    <div style="position: relative; text-align: center;">
+        <img src="img/mission/003.jpg" usemap="#image-map" style="width: 100%;" />
+        <div style="position: absolute; top: 0%; left: 0%; width: 100%; height: 100%;">
+            <input type="text" style="position: absolute; top: 54.3%; left: 37%; width: 26%; height: 2.1%;" />
+            <input type="text" style="position: absolute; top: 58.3%; left: 37%; width: 26%; height: 2.1%;" />
+            <input type="text" style="position: absolute; top: 62.3%; left: 37%; width: 26%; height: 2.1%;" />
+        </div>
+        <map name="image-map">
+            <area target="_self" alt="" title="" href="introduce02.html" coords="588,1492,913,1648" shape="rect">
+        </map>
+    </div>
+  <script>
+    /*if (document.location.protocol == 'http:') {
+        document.location.href = document.location.href.replace('http:', 'https:');
+    }*/
+    </script>
+</body>
+</html>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('img[usemap]').rwdImageMaps();
+    });
+</script>

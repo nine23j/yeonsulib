@@ -1,0 +1,147 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <title>일회용도서관을 탈출하라</title>
+    <script src="jsQR.js"></script>
+    <script src="jquery-3.2.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Ropa+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="main.css?v=3">
+</head>
+<body>
+    <form name="qrForm" id="qrForm">
+    <input type="hidden" name="lockPosition" id="lockPosition">
+    <input type="hidden" name="code" id="code">
+    <div class="cameraMent" style="margin-top: 50px;">QR코드를 인식시켜주세요.</div>
+    <div class="canvasContainer">
+        <canvas id="canvas" style="width: 75%;" hidden></canvas>
+        <div id="cameraMent" hidden></div>
+    </div>
+    <div id="outputData"></div>
+    </form>
+</body>
+<script>
+    if (document.location.protocol == 'http:') {
+        document.location.href = document.location.href.replace('http:', 'https:');
+    }
+
+    const url = new URL(window.location.href);
+    const qrPosition = url.searchParams.get('qrPosition');
+
+    const confirmQrPosition = checkQrPosition(qrPosition);
+
+    console.log(confirmQrPosition);
+
+    document.getElementById('lockPosition').value = lockPosition;
+
+    var video = document.createElement("video");
+    var canvasElement = document.getElementById("canvas");
+    var canvas = canvasElement.getContext("2d");
+    var localStream;
+    var animation;
+    var qrFind = false;
+    //var loadingMessage = document.getElementById("loadingMessage");
+    //var outputContainer = document.getElementById("output");
+    //var outputMessage = document.getElementById("outputMessage");
+    var outputData = document.getElementById("outputData");
+
+    $('#cameraMent').hide();
+    window.scrollTo(0, 0);
+
+    if (video.srcObject) {
+        video.pause();
+        video.src = "";
+        localStream.getTracks()[0].stop();
+        cancelAnimationFrame(animation);
+    }
+
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function(stream) {
+        video.srcObject = stream;
+        localStream = stream;
+        video.setAttribute("playsinline", true);
+        video.play();
+        animation = requestAnimationFrame(tick);
+    });
+
+    function drawLine(begin, end, color) {
+        canvas.beginPath();
+        canvas.moveTo(begin.x, begin.y);
+        canvas.lineTo(end.x, end.y);
+        canvas.lineWidth = 4;
+        canvas.strokeStyle = color;
+        canvas.stroke();
+    }
+
+    function tick() {
+      if (video.readyState === video.HAVE_ENOUGH_DATA) {
+        canvasElement.hidden = false;
+
+        canvasElement.height = video.videoHeight;
+        canvasElement.width = video.videoWidth;
+        canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+        var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+        var code = jsQR(imageData.data, imageData.width, imageData.height, {
+          inversionAttempts: "dontInvert",
+        });
+        if (code) {
+            drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
+            drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
+            drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
+            drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
+
+            document.getElementById('code').value = code.data;
+            //outputData.innerText = lockPosition + ' - ' + code.data;
+
+            //location.href='stampRegisterProc.php?lockPosition=' + lockPosition + '&code=' + code.data;
+
+            if (!qrFind) {
+                qrFind = true;
+                checkQr();
+            }
+        } else {
+          //outputMessage.hidden = false;
+          //outputData.parentElement.hidden = true;
+        }
+      }
+      animation = requestAnimationFrame(tick);
+    }
+
+    function cameraMentVibration() {
+        $('#cameraMent').show();
+        $('#cameraMent').addClass("vibration");
+
+        setTimeout(function() {
+            $('#cameraMent').removeClass("vibration");
+        }, 400);
+    }
+
+    function checkQrPosition(qrPosition) {
+        let confirmQrPosition;
+
+        switch(qrPosition) {
+            case '784407522147':
+                confirmQrPosition = 'qr01'
+                break;
+            case '784860523599':
+                confirmQrPosition = 'qr02'
+                break;
+            case '1167860906599':
+                confirmQrPosition = 'qr03'
+                break;
+            case '1167408906147':
+                confirmQrPosition = 'qr04'
+                break;
+            case '15504071289147':
+                confirmQrPosition = 'qr05'
+                break;
+            case '15508601288599':
+                confirmQrPosition = 'qr06'
+                break;
+        }
+
+        return confirmQrPosition;
+    }
+
+    function checkQr() {
+    }
+</script>
