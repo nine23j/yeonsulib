@@ -13,6 +13,7 @@
     <div style="text-align: center;">
         <img src="img/introduce/004.jpg" id="escapelibImg" usemap="#image-map" style="width: 100%;" />
         <map name="image-map">
+            <area target="_self" alt="" title="" href="javascript:void(0);" onclick="checkPass();" coords="678,56,867,240" shape="rect">
             <area target="_self" alt="" title="" href="qr.html?qrPosition=784407522147" coords="147,522,407,784" shape="rect">
             <area target="_self" alt="" title="" href="javascript:void(0);" onclick="checkPosition(2);" coords="599,523,860,784" shape="rect">
             <area target="_self" alt="" title="" href="javascript:void(0);" onclick="checkPosition(3);" coords="599,906,860,1167" shape="rect">
@@ -50,7 +51,30 @@
             if ($.cookie('quiz0' + i)) {
                 $('#escapelibImg').after(stampImgMap['quiz0' + i]);
             }
-        }        
+        }
+
+        if ($.cookie('passQuiz')) {
+            $('#escapelibImg').after(
+                '<img src="img/stamp/007.png" style="position: absolute; top: 30%; left: 9%; width: 20%;">'
+            );
+        }
+    }
+
+    function checkPass() {
+        let passQuizCount;
+
+        for (passQuizCount = 1; passQuizCount < 7; passQuizCount++) {
+            if (!$.cookie('quiz0' + passQuizCount)) {
+                break;
+            }
+        }
+
+        if (passQuizCount > 5) {
+            $.cookie('passQuiz', true);
+            $('#escapelibImg').after(
+                '<img src="img/stamp/007.png" style="position: absolute; top: 30%; left: 9%; width: 20%;">'
+            );
+        }
     }
 
     function checkPosition(position) {
