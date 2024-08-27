@@ -45,6 +45,7 @@
         let isExistLib03 = libMap[$('#input03').val()] || alert('세번째 칸에 도서관 이름을 정확하게 입력해주세요.');
 
         if (isExistLib01 && isExistLib02 && isExistLib03) {
+            $.cookie('quiz01', true);
             alet('축하합니다. 다음 단계로 도전하세요.');
             location.href = 'introduce03.html';
         }
