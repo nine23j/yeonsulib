@@ -36,13 +36,28 @@
 
     function checkQuiz() {
         const libMap = {
-            '청학도서관': true,
-            '연수별빛도서관': true,
+            '연수청학도서관': true,
+            '연수꿈담도서관': true,
+            '송도국제어린이도서관': true,
+            '해돋이도서관': true,
+            '선학별빛도서관': true,
+            '동춘나래도서관': true,
+            '함박비류도서관': true,
+            '솔안공원작은도서관': true,
+            '문화공원작은도서관': true,
+            '해찬솔공원작은도서관': true,
+            '누리공원작은도서관': true,
+            '옥련1동작은도서관': true,
+            '옥련2동어린이작은도서관': true,
+            '연수1동작은도서관': true,
+            '송도2동작은도서관': true,
+            '송도3동작은도서관': true,
+            '송도5동작은도서관': true,
         };
         
-        let isExistLib01 = libMap[$('#input01').val()] || alert('첫번째 칸에 도서관 이름을 정확하게 입력해주세요.');
-        let isExistLib02 = libMap[$('#input02').val()] || alert('두번째 칸에 도서관 이름을 정확하게 입력해주세요.');
-        let isExistLib03 = libMap[$('#input03').val()] || alert('세번째 칸에 도서관 이름을 정확하게 입력해주세요.');
+        let isExistLib01 = libMap[$('#input01').val()] || (function() { alert('첫번째 칸에 도서관 이름을 정확하게 입력해주세요.'); return false; })();
+        let isExistLib02 = libMap[$('#input02').val()] || (function() { alert('두번째 칸에 도서관 이름을 정확하게 입력해주세요.'); return false; })();
+        let isExistLib03 = libMap[$('#input03').val()] || (function() { alert('세번째 칸에 도서관 이름을 정확하게 입력해주세요.'); return false; })();
 
         if (isExistLib01 && isExistLib02 && isExistLib03) {
             $.cookie('quiz01', true);
