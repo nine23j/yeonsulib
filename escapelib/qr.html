@@ -82,6 +82,7 @@
         var code = jsQR(imageData.data, imageData.width, imageData.height, {
           inversionAttempts: "dontInvert",
         });
+
         if (code) {
             drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
             drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
@@ -89,9 +90,6 @@
             drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
 
             document.getElementById('code').value = code.data;
-            //outputData.innerText = lockPosition + ' - ' + code.data;
-
-            //location.href='stampRegisterProc.php?lockPosition=' + lockPosition + '&code=' + code.data;
 
             if (!qrFind) {
                 qrFind = true;
