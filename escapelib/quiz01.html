@@ -55,9 +55,21 @@
             '송도5동작은도서관': true,
         };
         
-        let isExistLib01 = libMap[$('#input01').val()] || (function() { alert('첫번째 칸에 도서관 이름을 정확하게 입력해주세요.'); return false; })();
-        let isExistLib02 = libMap[$('#input02').val()] || (function() { alert('두번째 칸에 도서관 이름을 정확하게 입력해주세요.'); return false; })();
-        let isExistLib03 = libMap[$('#input03').val()] || (function() { alert('세번째 칸에 도서관 이름을 정확하게 입력해주세요.'); return false; })();
+        let isExistLib01 = libMap[$('#input01').val()];
+        if (!isExistLib01) {
+            alert('첫번째 칸에 도서관 이름을 정확하게 입력해주세요.');
+            return false;
+        }
+        let isExistLib02 = libMap[$('#input02').val()];
+        if (!isExistLib02) {
+            alert('두번째 칸에 도서관 이름을 정확하게 입력해주세요.');
+            return false;
+        }
+        let isExistLib03 = libMap[$('#input03').val()];
+        if (!isExistLib03) {
+            alert('세번째 칸에 도서관 이름을 정확하게 입력해주세요.');
+            return false;
+        }
 
         if (isExistLib01 && isExistLib02 && isExistLib03) {
             $.cookie('quiz01', true);
