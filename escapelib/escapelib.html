@@ -7,24 +7,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-rwdImageMaps/1.6/jquery.rwdImageMaps.min.js"></script>
     <script src="jquery.cookie.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Ropa+Sans" rel="stylesheet">
-    <link rel="stylesheet" href="main.css?v=2023092111">
+    <link rel="stylesheet" href="main.css?v=1">
 </head>
 <body>
     <div style="text-align: center;">
-        <img src="img/introduce/004.jpg" usemap="#image-map" style="width: 100%;" />
+        <img src="img/introduce/004.jpg" id="escapelibImg" usemap="#image-map" style="width: 100%;" />
         <map name="image-map">
             <area target="_self" alt="" title="" href="qr.html?qrPosition=784407522147" coords="147,522,407,784" shape="rect">
-            <area target="_self" alt="" title="" href="qr.html?qrPosition=784860523599" coords="599,523,860,784" shape="rect">
-            <area target="_self" alt="" title="" href="qr.html?qrPosition=1167860906599" coords="599,906,860,1167" shape="rect">
-            <area target="_self" alt="" title="" href="qr.html?qrPosition=1167408906147" coords="147,906,408,1167" shape="rect">
-            <area target="_self" alt="" title="" href="qr.html?qrPosition=15504071289147" coords="147,1289,407,1550" shape="rect">
-            <area target="_self" alt="" title="" href="qr.html?qrPosition=15508601288599" coords="599,1288,860,1550" shape="rect">
+            <area target="_self" alt="" title="" href="javascript:void(0);" onclick="checkPosition(2);" coords="599,523,860,784" shape="rect">
+            <area target="_self" alt="" title="" href="javascript:void(0);" onclick="checkPosition(3);" coords="599,906,860,1167" shape="rect">
+            <area target="_self" alt="" title="" href="javascript:void(0);" onclick="checkPosition(4);" coords="147,906,408,1167" shape="rect">
+            <area target="_self" alt="" title="" href="javascript:void(0);" onclick="checkPosition(5);" coords="147,1289,407,1550" shape="rect">
+            <area target="_self" alt="" title="" href="javascript:void(0);" onclick="checkPosition(6);" coords="599,1288,860,1550" shape="rect">
         </map>
     </div>
   <script>
-    /*if (document.location.protocol == 'http:') {
+    if (document.location.protocol == 'http:') {
         document.location.href = document.location.href.replace('http:', 'https:');
-    }*/
+    }
     </script>
 </body>
 </html>
@@ -32,5 +32,41 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('img[usemap]').rwdImageMaps();
+
+        drawStamp();
     });
+
+    function drawStamp() {
+        stampImgMap = {
+            'quiz01': '<img src="img/stamp/001.png" style="position: absolute; top: 30%; left: 9%; width: 20%;">',
+            'quiz02': '<img src="img/stamp/002.png" style="position: absolute; top: 30%; left: 9%; width: 20%;">',
+            'quiz03': '<img src="img/stamp/003.png" style="position: absolute; top: 30%; left: 9%; width: 20%;">',
+            'quiz04': '<img src="img/stamp/004.png" style="position: absolute; top: 30%; left: 9%; width: 20%;">',
+            'quiz05': '<img src="img/stamp/005.png" style="position: absolute; top: 30%; left: 9%; width: 20%;">',
+            'quiz06': '<img src="img/stamp/006.png" style="position: absolute; top: 30%; left: 9%; width: 20%;">'
+        };
+        
+        for (let i = 0; i < 6; i++) {
+            if ($.cookie('quiz0' + i)) {
+                $('#escapelibImg').after(stampImgMap['quiz0' + i]);
+            }
+        }        
+    }
+
+    function checkPosition(position) {
+        if (!$.cookie('quiz0' + (position - 1))) {
+            alert('이전 단계의 미션을 통과해야 다음 미션을 진행할 수 있습니다.');
+            return false;
+        }
+
+        const positionURLMap = {
+            2: 'qr.html?qrPosition=784860523599',
+            3: 'qr.html?qrPosition=1167860906599',
+            4: 'qr.html?qrPosition=1167408906147',
+            5: 'qr.html?qrPosition=15504071289147',
+            6: 'qr.html?qrPosition=15508601288599'
+        };
+
+        location.href = positionURLMap[position];
+    }
 </script>
