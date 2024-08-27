@@ -27,8 +27,7 @@
 
     const url = new URL(window.location.href);
     const qrPosition = url.searchParams.get('qrPosition');
-
-    const confirmQrPosition = checkQrPosition(qrPosition);
+    const confirmQrPosition = getQrPosition(qrPosition);
 
     console.log(confirmQrPosition);
 
@@ -96,7 +95,7 @@
 
             if (!qrFind) {
                 qrFind = true;
-                checkQr();
+                checkQr(confirmQrPosition);
             }
         } else {
           //outputMessage.hidden = false;
@@ -115,33 +114,55 @@
         }, 400);
     }
 
-    function checkQrPosition(qrPosition) {
-        let confirmQrPosition;
+    function getQrPosition(qrPosition) {
+        const qrPositionMap = {
+            '784407522147': 'qr01',
+            '784860523599': 'qr02',
+            '1167860906599': 'qr03'
+            '1167408906147': 'qr04',
+            '15504071289147': 'qr05',
+            '15508601288599': 'qr06'
+        };
 
-        switch(qrPosition) {
-            case '784407522147':
-                confirmQrPosition = 'qr01'
-                break;
-            case '784860523599':
-                confirmQrPosition = 'qr02'
-                break;
-            case '1167860906599':
-                confirmQrPosition = 'qr03'
-                break;
-            case '1167408906147':
-                confirmQrPosition = 'qr04'
-                break;
-            case '15504071289147':
-                confirmQrPosition = 'qr05'
-                break;
-            case '15508601288599':
-                confirmQrPosition = 'qr06'
-                break;
-        }
-
-        return confirmQrPosition;
+        return qrPositionMap[qrPosition] || false;
     }
 
-    function checkQr() {
+    function checkQr(confirmQrPosition) {
+        const matchQrAndMissionMap = {
+            'qr01': 'mission01',
+            'qr02': 'mission02',
+            'qr03': 'mission03',
+            'qr04': 'mission04',
+            'qr05': 'mission05',
+            'qr06': 'mission06'
+        };
+
+        const missQrMessageMap = {
+            'qr01': '1단계 17번 부스로 가세요.',
+            'qr02': '2단계 14번 부스로 가세요.',
+            'qr03': '3단계 28번 부스로 가세요.',
+            'qr04': '4단계 3번 부스로 가세요.',
+            'qr05': '5단계 8번 부스로 가세요.',
+            'qr06': '6단계 25번 부스로 가세요.'
+        }
+
+        const missionURLMap = {
+            'mission01': 'quiz01.html',
+            'mission02': 'quiz02.html',
+            'mission03': 'quiz03.html',
+            'mission04': 'quiz04.html',
+            'mission05': 'quiz05.html',
+            'mission06': 'quiz06.html'
+        }
+
+        const checkMatch = matchQrAndMissionMap[confirmQrPosition] || false;
+
+        if (!checkMatch) {
+            alert('올바른 qr이 아닙니다.\n' + missQrMessageMap[qrPosition]);
+            return false;
+        }
+
+        alert('알맞는 qr을 찾았습니다.');
+        location.href = missionURLMap[confirmQrPosition];        
     }
 </script>
