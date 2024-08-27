@@ -12,13 +12,13 @@
 <body>
     <div style="position: relative; text-align: center;">
         <img src="img/mission/003.jpg" usemap="#image-map" style="width: 100%;" />
-        <div style="position: absolute; top: 0%; left: 0%; width: 100%; height: 100%;">
-            <input type="text" id="input01" style="position: absolute; top: 54.3%; left: 37%; width: 26%; height: 2.1%;" />
-            <input type="text" id="input02" style="position: absolute; top: 58.3%; left: 37%; width: 26%; height: 2.1%;" />
-            <input type="text" id="input03" style="position: absolute; top: 62.3%; left: 37%; width: 26%; height: 2.1%;" />
+        <div style="position: absolute; top: 0%; left: 0%; width: 100%; height: 90%;">
+            <input type="text" id="input01" style="position: absolute; top: 57.9%; left: 26.5%; width: 47%; height: 4.6%;" />
+            <input type="text" id="input02" style="position: absolute; top: 65.7%; left: 26.5%; width: 47%; height: 4.6%;" />
+            <input type="text" id="input03" style="position: absolute; top: 73.9%; left: 26.5%; width: 47%; height: 4.6%;" />
         </div>
         <map name="image-map">
-            <area target="_self" alt="" title="" href='javascript:void(0);' onclick="checkQuiz();" coords="588,1492,913,1648" shape="rect">
+            <area target="_self" title="" href="javascript:void(0);" onclick="checkQuiz();" coords="894,1750,1027,1883" shape="rect">
         </map>
     </div>
   <script>
@@ -54,8 +54,9 @@
             '송도3동작은도서관': true,
             '송도5동작은도서관': true,
         };
-        
+
         let isExistLib01 = libMap[$('#input01').val()];
+
         if (!isExistLib01) {
             alert('첫번째 칸에 도서관 이름을 정확하게 입력해주세요.');
             return false;
@@ -73,8 +74,8 @@
 
         if (isExistLib01 && isExistLib02 && isExistLib03) {
             $.cookie('quiz01', true);
-            alet('축하합니다. 다음 단계로 도전하세요.');
-            location.href = 'introduce03.html';
+            alert('축하합니다. 다음 단계로 도전하세요.');
+            location.href = 'escapelib.html';
         }
     }
 </script>
