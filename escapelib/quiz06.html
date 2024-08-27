@@ -17,6 +17,7 @@
             <input type="number" id="input02" style="position: absolute; top: 54.3%; left: 37%; width: 26%; height: 2.1%;" />
         </div>
         <map name="image-map">
+            <area target="_self" alt="" title="" href='javascript:void(0);' onclick="confirmQuiz();" coords="588,1492,913,1648" shape="rect">
             <area target="_self" alt="" title="" href='javascript:void(0);' onclick="checkQuiz();" coords="588,1492,913,1648" shape="rect">
         </map>
     </div>
@@ -33,12 +34,15 @@
         $('img[usemap]').rwdImageMaps();
     });
 
+    function confirmQuiz() {
+        $.cookie('quiz06', true);
+    }
+
     function checkQuiz() {
-        if ($('#input01').val() == 1) {
-            alet('축하합니다. 다음 단계로 도전하세요.');
+        if ($.cookie('quiz06') {
             location.href = 'introduce03.html';
         } else {
-            alet('틀렸습니다. 다시 입력해주세요.');
+            alet('행사운영자에게 확인시켜주세요.');
         }
     }
 </script>
