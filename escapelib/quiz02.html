@@ -13,9 +13,7 @@
     <div style="position: relative; text-align: center;">
         <img src="img/mission/004.jpg" usemap="#image-map" style="width: 100%;" />
         <div style="position: absolute; top: 0%; left: 0%; width: 100%; height: 100%;">
-            <input type="text" style="position: absolute; top: 54.3%; left: 37%; width: 26%; height: 2.1%;" />
-            <input type="text" style="position: absolute; top: 58.3%; left: 37%; width: 26%; height: 2.1%;" />
-            <input type="text" style="position: absolute; top: 62.3%; left: 37%; width: 26%; height: 2.1%;" />
+            <input type="text" id="input01" style="position: absolute; top: 54.3%; left: 37%; width: 26%; height: 2.1%;" />
         </div>
         <map name="image-map">
             <area target="_self" alt="" title="" href='javascript:void(0);' onclick="checkQuiz();" coords="588,1492,913,1648" shape="rect">
@@ -35,18 +33,11 @@
     });
 
     function checkQuiz() {
-        const libMap = {
-            '청학도서관': true,
-            '연수별빛도서관': true,
-        };
-        
-        let isExistLib01 = libMap[$('#input01').val()] || alert('첫번째 칸에 도서관 이름을 정확하게 입력해주세요.');
-        let isExistLib02 = libMap[$('#input02').val()] || alert('두번째 칸에 도서관 이름을 정확하게 입력해주세요.');
-        let isExistLib03 = libMap[$('#input03').val()] || alert('세번째 칸에 도서관 이름을 정확하게 입력해주세요.');
-
-        if (isExistLib01 && isExistLib02 && isExistLib03) {
+        if ($('#input01').val() == '카드') {
             alet('축하합니다. 다음 단계로 도전하세요.');
             location.href = 'introduce03.html';
+        } else {
+            alet('틀렸습니다. 다시 입력해주세요.');
         }
     }
 </script>
