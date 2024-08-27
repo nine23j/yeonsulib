@@ -55,20 +55,29 @@
             '송도5동작은도서관': true,
         };
 
-        let isExistLib01 = libMap[$('#input01').val()];
+        let input01 = $('#input01').val();
+        let input02 = $('#input02').val();
+        let input03 = $('#input03').val();
+
+        let isExistLib01 = libMap[input01];
 
         if (!isExistLib01) {
             alert('첫번째 칸에 도서관 이름을 정확하게 입력해주세요.');
             return false;
         }
-        let isExistLib02 = libMap[$('#input02').val()];
+        let isExistLib02 = libMap[input02];
         if (!isExistLib02) {
             alert('두번째 칸에 도서관 이름을 정확하게 입력해주세요.');
             return false;
         }
-        let isExistLib03 = libMap[$('#input03').val()];
+        let isExistLib03 = libMap[input03];
         if (!isExistLib03) {
             alert('세번째 칸에 도서관 이름을 정확하게 입력해주세요.');
+            return false;
+        }
+
+        if (input01 === input02 || input01 === input03 || input02 === input03) {
+            alert('각 칸에 중복되지 않는 도서관 이름을 입력해주세요.');
             return false;
         }
 
