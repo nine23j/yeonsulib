@@ -11,13 +11,13 @@
 </head>
 <body>
     <div style="position: relative; text-align: center;">
-        <img src="img/mission/005.jpg" usemap="#image-map" style="width: 100%;" />
-        <div style="position: absolute; top: 0%; left: 0%; width: 100%; height: 90%;">
-            <input type="number" id="input01" style="position: absolute; top: 54.3%; left: 37%; width: 26%; height: 2.1%;" />
-            <input type="number" id="input02" style="position: absolute; top: 54.3%; left: 37%; width: 26%; height: 2.1%;" />
+        <img src="img/mission/008.jpg" usemap="#image-map" style="width: 100%;" />
+        <div style="position: absolute; top: 30%; left: 0%; width: 100%; height: 60%;">
+            <input type="number" id="input01" style="position: absolute; top: 47.6%; left: 7%; width: 86%; height: 6.8%;" />
+            <input type="number" id="input02" style="position: absolute; top: 57.5%; left: 7%; width: 86%; height: 6.8%;" />
         </div>
         <map name="image-map">
-            <area target="_self" alt="" title="" href='javascript:void(0);' onclick="confirmQuiz();" coords="588,1492,913,1648" shape="rect" />
+            <area target="_self" alt="" title="" href="javascript:void(0);" onclick="confirmQuiz();" coords="997,377,1058,486" shape="rect">
             <area target="_self" alt="" title="" href='javascript:void(0);' onclick="checkQuiz();" coords="894,1750,1027,1883" shape="rect" />
         </map>
     </div>
@@ -31,18 +31,24 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        if (!$.cookie('quiz05')) {
+            alert('전 단계의 퀴즈를 맞추고 오세요.');
+            location.href = 'escapelib.html';
+        }
+
         $('img[usemap]').rwdImageMaps();
     });
 
     function confirmQuiz() {
         $.cookie('quiz06', true);
+        location.href = 'quizpass01.html';
     }
 
     function checkQuiz() {
-        if ($.cookie('quiz06') {
-            location.href = 'escapelib.html';
+        if (!$('#input01').val() || !$('#input02').val()) {
+            alert('약속 내용을 적어주세요.');
         } else {
-            alet('행사운영자에게 확인시켜주세요.');
+            alert('행사운영자에게 확인시켜주세요.');
         }
     }
 </script>

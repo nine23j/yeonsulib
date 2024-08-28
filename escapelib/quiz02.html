@@ -13,7 +13,7 @@
     <div style="position: relative; text-align: center;">
         <img src="img/mission/004.jpg" usemap="#image-map" style="width: 100%;" />
         <div style="position: absolute; top: 0%; left: 0%; width: 100%; height: 90%;">
-            <input type="text" id="input01" style="position: absolute; top: 54.3%; left: 37%; width: 26%; height: 2.1%;" />
+            <input type="text" id="input01" style="position: absolute; top: 69.1%; left: 48%; width: 31%; height: 7.5%;" />
         </div>
         <map name="image-map">
             <area target="_self" title="" href="javascript:void(0);" onclick="checkQuiz();" coords="894,1750,1027,1883" shape="rect" />
@@ -29,16 +29,23 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        if (!$.cookie('quiz01')) {
+            alert('전 단계의 퀴즈를 맞추고 오세요.');
+            location.href = 'escapelib.html';
+        }
+
         $('img[usemap]').rwdImageMaps();
     });
 
     function checkQuiz() {
         if ($('#input01').val() == '카드') {
             $.cookie('quiz02', true);
-            alet('축하합니다. 다음 단계로 도전하세요.');
+            alert('축하합니다. 다음 단계로 도전하세요.');
             location.href = 'escapelib.html';
+        } else if(!$('#input01').val()) {
+            alert('정답을 입력해주세요.');
         } else {
-            alet('틀렸습니다. 다시 입력해주세요.');
+            alert('틀렸습니다. 다시 입력해주세요.');
         }
     }
 </script>

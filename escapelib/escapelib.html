@@ -20,6 +20,7 @@
             <area target="_self" alt="" title="" href="javascript:void(0);" onclick="checkPosition(4);" coords="147,906,408,1167" shape="rect" />
             <area target="_self" alt="" title="" href="javascript:void(0);" onclick="checkPosition(5);" coords="147,1289,407,1550" shape="rect" />
             <area target="_self" alt="" title="" href="javascript:void(0);" onclick="checkPosition(6);" coords="599,1288,860,1550" shape="rect" />
+            <area target="_self" alt="" title="" href="javascript:void(0);" onclick="initCookie();" coords="394,1836,687,1893" shape="rect" />
         </map>
     </div>
   <script>
@@ -39,15 +40,15 @@
 
     function drawStamp() {
         stampImgMap = {
-            'quiz01': '<img src="img/stamp/001.png" style="position: absolute; top: 30%; left: 9%; width: 20%;">',
-            'quiz02': '<img src="img/stamp/002.png" style="position: absolute; top: 30%; left: 9%; width: 20%;">',
-            'quiz03': '<img src="img/stamp/003.png" style="position: absolute; top: 30%; left: 9%; width: 20%;">',
-            'quiz04': '<img src="img/stamp/004.png" style="position: absolute; top: 30%; left: 9%; width: 20%;">',
-            'quiz05': '<img src="img/stamp/005.png" style="position: absolute; top: 30%; left: 9%; width: 20%;">',
-            'quiz06': '<img src="img/stamp/006.png" style="position: absolute; top: 30%; left: 9%; width: 20%;">'
+            'quiz01': '<img src="img/stamp/001.png" style="position: absolute; top: 39.8%; left: 10%; width: 42%;">',
+            'quiz02': '<img src="img/stamp/002.png" style="position: absolute; top: 39.8%; left: 50.8%; width: 42%;">',
+            'quiz03': '<img src="img/stamp/003.png" style="position: absolute; top: 74.5%; left: 50.8%; width: 42%;">',
+            'quiz04': '<img src="img/stamp/004.png" style="position: absolute; top: 74.5%; left: 10%; width: 42%;">',
+            'quiz05': '<img src="img/stamp/005.png" style="position: absolute; top: 109.4%; left: 10%; width: 42%;">',
+            'quiz06': '<img src="img/stamp/006.png" style="position: absolute; top: 109.4%; left: 50.8%; width: 42%;">'
         };
         
-        for (let i = 0; i < 6; i++) {
+        for (let i = 1; i < 7; i++) {
             if ($.cookie('quiz0' + i)) {
                 $('#escapelibImg').after(stampImgMap['quiz0' + i]);
             }
@@ -55,7 +56,7 @@
 
         if ($.cookie('passQuiz')) {
             $('#escapelibImg').after(
-                '<img src="img/stamp/007.png" style="position: absolute; top: 30%; left: 9%; width: 20%;">'
+                '<img src="img/stamp/007.png" style="position: absolute; top: -0.4%; left: 58.8%; width: 31%;">'
             );
         }
     }
@@ -92,5 +93,14 @@
         };
 
         location.href = positionURLMap[position];
+    }
+
+    function initCookie() {
+        for (let i = 1; i < 7; i++) {
+            $.removeCookie('quiz0' + i)
+        }
+        $.removeCookie('passQuiz');
+
+        location.href = 'escapelib.html';
     }
 </script>
