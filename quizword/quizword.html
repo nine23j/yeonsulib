@@ -1,0 +1,243 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <meta name="google" content="notranslate" />
+    <title>끝말퀴즈 잇기 열전</title>
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-rwdImageMaps/1.6/jquery.rwdImageMaps.min.js"></script>
+    <script src="jquery.cookie.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Ropa+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="main.css?v=3">
+</head>
+<body>
+    <div style="position: relative; text-align: center;">
+        <img src="img/002.jpg" id="quizWordImg" usemap="#image-map" style="width: 100%;" />
+        <map name="image-map">
+            <area target="_self" href="javascript:void(0);" onclick="checkPosition(1);" coords="590,703,703,814" shape="rect" />
+            <area target="_self" href="javascript:void(0);" onclick="checkPosition(2);" coords="280,843,400,979" shape="rect" />
+            <area target="_self" href="javascript:void(0);" onclick="checkPosition(3);" coords="831,848,946,964" shape="rect" />
+            <area target="_self" href="javascript:void(0);" onclick="checkPosition(4);" coords="623,981,747,1102" shape="rect" />
+            <area target="_self" href="javascript:void(0);" onclick="checkPosition(5);" coords="143,1073,268,1196" shape="rect" />
+            <area target="_self" href="javascript:void(0);" onclick="checkPosition(6);" coords="377,1152,495,1273" shape="rect" />
+            <area target="_self" href="javascript:void(0);" onclick="checkPosition(7);" coords="851,1130,981,1264" shape="rect" />
+            <area target="_self" href="javascript:void(0);" onclick="checkPosition(8);" coords="591,1231,722,1356" shape="rect" />
+            <area target="_self" href="javascript:void(0);" onclick="checkPosition(9);" coords="148,1395,268,1514" shape="rect" />
+            <area target="_self" href="javascript:void(0);" onclick="checkPosition(10);" coords="429,1428,567,1559" shape="rect" />
+            <area target="_self" href="javascript:void(0);" onclick="checkPosition(11);" coords="802,1426,927,1551" shape="rect" />
+            <area target="_self" href="javascript:void(0);" onclick="checkPosition(12);" coords="185,1661,311,1777" shape="rect" />
+            <area target="_self" href="javascript:void(0);" onclick="checkPosition(13);" coords="792,1608,912,1726" shape="rect" />
+            <area target="_self" href="javascript:void(0);" onclick="checkPosition(14);" coords="506,1697,624,1818" shape="rect" />
+
+            <area target="_self" href="javascript:void(0);" onclick="initCookie();" coords="422,157,626,320" shape="rect /">
+
+            <area target="_self" href="javascript:void(0);" onclick="quizWord(1);" coords="46,519,228,582" shape="rect" />
+            <area target="_self" href="javascript:void(0);" onclick="quizWord(2);" coords="265,519,388,582" shape="rect" />
+            <area target="_self" href="javascript:void(0);" onclick="quizWord(3);" coords="422,518,545,582" shape="rect" />
+            <area target="_self" href="javascript:void(0);" onclick="quizWord(4);" coords="569,519,751,582" shape="rect" />
+            <area target="_self" href="javascript:void(0);" onclick="quizWord(5);" coords="772,519,894,582" shape="rect" />
+            <area target="_self" href="javascript:void(0);" onclick="quizWord(6);" coords="919,516,1042,582" shape="rect" />
+        </map>
+    </div>
+  <script>
+    if (document.location.protocol == 'http:') {
+        document.location.href = document.location.href.replace('http:', 'https:');
+    }
+    </script>
+</body>
+</html>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('img[usemap]').rwdImageMaps();
+
+        printWord();
+
+        printQuizWord();
+    });
+
+    function printWord() {
+        let checkAllWord = true;
+
+        const positionMap = {
+            'qrPosition1': '<div id="qrPosition1" style="position: absolute; top: 36%; left: 56%; background-color: #fe9fb3; width: 8%; height:6%; font-size: 7vw;" class="vertical-center"></div>',
+            'qrPosition2': '<div id="qrPosition2" style="position: absolute; top: 43.8%; left: 28%; background-color: #95cad8; width: 8%; height:6%; font-size: 7vw;" class="vertical-center"></div>',
+            'qrPosition3': '<div id="qrPosition3" style="position: absolute; top: 43.6%; left: 78%; background-color: #74c487; width: 8%; height:6%; font-size: 7vw;" class="vertical-center"></div>',
+            'qrPosition4': '<div id="qrPosition4" style="position: absolute; top: 50.6%; left: 59%; background-color: #86dfbf; width: 8%; height:6%; font-size: 7vw;" class="vertical-center"></div>',
+            'qrPosition5': '<div id="qrPosition5" style="position: absolute; top: 55.6%; left: 15%; background-color: #fee5bc; width: 8%; height:6%; font-size: 7vw;" class="vertical-center"></div>',
+            'qrPosition6': '<div id="qrPosition6" style="position: absolute; top: 60%; left: 37%; background-color: #d3e5a9; width: 8%; height:6%; font-size: 7vw;" class="vertical-center"></div>',
+            'qrPosition7': '<div id="qrPosition7" style="position: absolute; top: 59.6%; left: 80%; background-color: #85b7fe; width: 8%; height:6%; font-size: 7vw;" class="vertical-center"></div>',
+            'qrPosition8': '<div id="qrPosition8" style="position: absolute; top: 64.1%; left: 57%; background-color: #feb447; width: 8%; height:6%; font-size: 7vw;" class="vertical-center"></div>',
+            'qrPosition9': '<div id="qrPosition9" style="position: absolute; top: 73%; left: 15%; background-color: #8260ff; width: 8%; height:6%; font-size: 7vw;" class="vertical-center"></div>',
+            'qrPosition10': '<div id="qrPosition10" style="position: absolute; top: 74.5%; left: 43.5%; background-color: #fe9fb3; width: 8%; height:6%; font-size: 100%;" class="vertical-center"></div>',
+            'qrPosition11': '<div id="qrPosition11" style="position: absolute; top: 74%; left: 75%; background-color: #95cad8; width: 8%; height:6%; font-size: 7vw;" class="vertical-center"></div>',
+            'qrPosition12': '<div id="qrPosition12" style="position: absolute; top: 86%; left: 18.7%; background-color: #74c487; width: 8%; height:6%; font-size: 7vw;" class="vertical-center"></div>',
+            'qrPosition13': '<div id="qrPosition13" style="position: absolute; top: 84%; left: 75%; background-color: #feb447; width: 8%; height:6%; font-size: 7vw;" class="vertical-center"></div>',
+            'qrPosition14': '<div id="qrPosition14" style="position: absolute; top: 87.5%; left: 48%; background-color: #ce9fff; width: 8%; height:6%; font-size: 7vw;" class="vertical-center"></div>'
+        };
+
+        const wordMap = {
+            'book01': '도',
+            'book02': '서',
+            'book03': '관',
+            'book04': '지',
+            'book05': '식',
+            'book06': '문',
+            'book07': '화',
+            'book08': '환',
+            'book09': '경',
+            'book10': '을',
+            'book11': '서',
+            'book12': '로',
+            'book13': '잇',
+            'book14': '다'
+        };
+
+        for (let i = 1; i < 15; i++) {
+            if ($.cookie('qrPosition' + i)) {
+                $('#quizWordImg').after(positionMap['qrPosition' + i]);
+                $('#qrPosition' + i).text(wordMap[$.cookie('qrPosition' + i)]);
+            } else {
+                checkAllWord = false;
+            }
+        }
+
+        if (!checkAllWord) {
+            $('#quizWordImg').after(
+            '<div style="position: absolute; top: 20%; left: 3%; background-color: #f9f9c5; width: 95%; height: 13%; font-size: 4.5vw">' +
+            '<p>각 자물쇠를 클릭하고 책표지 QR을 스캔하여</p><p style="margin-top: -20px;">끝말을 획득하세요.</p>' +
+            '</div>'
+            );
+        } else {
+            let checkAllWord = true;
+
+            for (let i = 1; i < 7; i++) {
+                if (!$.cookie('quizWord' + i)) {
+                    checkAllWord = false;
+                    break;
+                }
+            }
+
+            if (!checkAllWord) {
+                alert('찾은 끝말을 이어 하나의 문장으로 만들어주세요.');
+            }
+        }
+    }
+
+    function checkPosition(position) {
+        location.href = 'qr.html?qrPosition=' + position;
+    }
+
+    function quizWord(position) {
+        const quizWordPosition = {
+            1: () => {
+                let input1 = prompt("가운데 글자 '서'를 포함하여 3글자 단어를 입력해주세요.", "");
+                if (input1 == '도서관') {
+                    $.cookie('quizWord1', true);
+                    alert('정답입니다.');
+                    return true;
+                } else {
+                    alert('틀렸습니다.\n다시 도전해주세요.');
+                    return false;
+                }
+            },
+            2: () => {
+                let input2 = prompt("2글자 단어를 입력해주세요.", "");
+                if (input2 == '지식') {
+                    $.cookie('quizWord2', true);
+                    alert('정답입니다.');
+                    return true;
+                } else {
+                    alert('틀렸습니다.\n다시 도전해주세요.');
+                    return false;
+                }
+            },
+            3: () => {
+                let input3 = prompt("첫글자 '문'을 포함하여 2글자 단어를 입력해주세요.", "");
+                if (input3 == '문화') {
+                    $.cookie('quizWord3', true);
+                    alert('정답입니다.');
+                    return true;
+                } else {
+                    alert('틀렸습니다.\n다시 도전해주세요.');
+                    return false;
+                }
+            },
+            4: () => {
+                let input4 = prompt("가운데 글자 '경'을 포함하여 3글자 단어를 입력해주세요.", "");
+                if (input4 == '환경을') {
+                    $.cookie('quizWord4', true);
+                    alert('정답입니다.');
+                    return true;
+                } else {
+                    alert('틀렸습니다.\n다시 도전해주세요.');
+                    return false;
+                }
+            },
+            5: () => {
+                let input5 = prompt("2글자 단어를 입력해주세요.", "");
+                if (input5 == '서로') {
+                    $.cookie('quizWord5', true);
+                    alert('정답입니다.');
+                    return true;
+                } else {
+                    alert('틀렸습니다.\n다시 도전해주세요.');
+                    return false;
+                }
+            },
+            6: () => {
+                let input6 = prompt("2글자 단어를 입력해주세요.", "");
+                if (input6 == '잇다') {
+                    $.cookie('quizWord6', true);
+                    alert('정답입니다.');
+                    return true;
+                } else {
+                    alert('틀렸습니다.\n다시 도전해주세요.');
+                    return false;
+                }
+            }
+        }
+
+        if (quizWordPosition[position]()) {
+            location.href = 'quizword.html';
+        }
+    }
+
+    function printQuizWord() {
+        let checkAllQuizWord = true;
+
+        const positionMap = {
+            'quizWord1': '<div style="position: absolute; top: 26.9%; left: 5.6%; font-size: 4vw; font-weight: bold">도</div>' +
+            '<div style="position: absolute; top: 26.9%; left: 16.5%; font-size: 4vw; font-weight: bold">관</div>',
+            'quizWord2': '<div style="position: absolute; top: 26.9%; left: 25.8%; font-size: 4vw; font-weight: bold">지</div>' +
+            '<div style="position: absolute; top: 26.9%; left: 31%; font-size: 4vw; font-weight: bold">식</div>',
+            'quizWord3': '<div style="position: absolute; top: 26.9%; left: 45.8%; font-size: 4vw; font-weight: bold">화</div>',
+            'quizWord4': '<div style="position: absolute; top: 26.9%; left: 54%; font-size: 4vw; font-weight: bold">환</div>' +
+            '<div style="position: absolute; top: 26.9%; left: 65%; font-size: 4vw; font-weight: bold">을</div>',
+            'quizWord5': '<div style="position: absolute; top: 26.9%; left: 72.5%; font-size: 4vw; font-weight: bold">서</div>' +
+            '<div style="position: absolute; top: 26.9%; left: 78%; font-size: 4vw; font-weight: bold">로</div>',
+            'quizWord6': '<div style="position: absolute; top: 26.9%; left: 86%; font-size: 4vw; font-weight: bold">잇</div>' +
+            '<div style="position: absolute; top: 26.9%; left: 92%; font-size: 4vw; font-weight: bold">다</div>',
+        }
+
+        for (let i = 1; i < 7; i++) {
+            if ($.cookie('quizWord' + i)) {
+                $('#quizWordImg').after(positionMap['quizWord' + i]);
+            } else {
+                checkAllWord = false;
+            }
+        }
+    }
+
+    function initCookie() {
+        for (let i = 1; i < 15; i++) {
+            $.removeCookie('qrPosition' + i)
+        }
+
+        for (let i = 1; i < 7; i++) {
+            $.removeCookie('quizWord' + i)
+        }
+
+        location.href = 'quizword.html';
+    }
+</script>

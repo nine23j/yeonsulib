@@ -2,11 +2,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no" />
-    <title>일회용도서관을 탈출하라</title>
+    <title>끝말퀴즈 잇기 열전</title>
     <script src="jsQR.js"></script>
     <script src="jquery-3.2.1.min.js"></script>
+    <script src="jquery.cookie.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Ropa+Sans" rel="stylesheet">
-    <link rel="stylesheet" href="main.css?v=3">
+    <link rel="stylesheet" href="main.css?v=2">
 </head>
 <body>
     <form name="qrForm" id="qrForm">
@@ -27,7 +28,6 @@
 
     const url = new URL(window.location.href);
     const qrPosition = url.searchParams.get('qrPosition');
-    const confirmQrPosition = getQrPosition(qrPosition);
 
     document.getElementById('lockPosition').value = lockPosition;
 
@@ -91,7 +91,7 @@
 
             if (!qrFind) {
                 qrFind = true;
-                if (!checkQr(confirmQrPosition, code.data)) {
+                if (!checkQr(qrPosition, code.data)) {
                     setTimeout(function() { qrFind = false; }, 1000);
                 }
             }
@@ -112,55 +112,40 @@
         }, 400);
     }
 
-    function getQrPosition(qrPosition) {
-        const qrPositionMap = {
-            '784407522147': 'qr01',
-            '784860523599': 'qr02',
-            '1167860906599': 'qr03',
-            '1167408906147': 'qr04',
-            '15504071289147': 'qr05',
-            '15508601288599': 'qr06'
+    function checkQr(qrPosition, data) {
+        const matchQrAndWordMap = {
+            'book01': 'book01',
+            'book02': 'book02',
+            'book03': 'book03',
+            'book04': 'book04',
+            'book05': 'book05',
+            'book06': 'book06',
+            'book07': 'book07',
+            'book08': 'book08',
+            'book09': 'book09',
+            'book10': 'book10',
+            'book11': 'book11',
+            'book12': 'book12',
+            'book13': 'book13',
+            'book14': 'book14'
         };
 
-        return qrPositionMap[qrPosition] || false;
-    }
+        const checkMatch = matchQrAndWordMap[data];
 
-    function checkQr(confirmQrPosition, data) {
-        const matchQrAndMissionMap = {
-            'qr01': 'mission01',
-            'qr02': 'mission02',
-            'qr03': 'mission03',
-            'qr04': 'mission04',
-            'qr05': 'mission05',
-            'qr06': 'mission06'
-        };
-
-        const missQrMessageMap = {
-            'qr01': '1단계 17번 부스로 가세요.',
-            'qr02': '2단계 14번 부스로 가세요.',
-            'qr03': '3단계 28번 부스로 가세요.',
-            'qr04': '4단계 3번 부스로 가세요.',
-            'qr05': '5단계 8번 부스로 가세요.',
-            'qr06': '6단계 25번 부스로 가세요.'
-        }
-
-        const missionURLMap = {
-            'mission01': 'quiz01.html',
-            'mission02': 'quiz02.html',
-            'mission03': 'quiz03.html',
-            'mission04': 'quiz04.html',
-            'mission05': 'quiz05.html',
-            'mission06': 'quiz06.html'
-        }
-
-        const checkMatch = matchQrAndMissionMap[confirmQrPosition];
-
-        if (checkMatch != data) {
-            alert('올바른 qr이 아닙니다.\n' + missQrMessageMap[confirmQrPosition]);
+        if (!checkMatch) {
+            alert('올바른 QR이 아닙니다.\n알맞은 QR을 찍어주세요.');
             return false;
         }
 
-        alert('알맞는 qr을 찾았습니다.');
-        location.href = missionURLMap[checkMatch];
+        for (let i = 1; i < 15; i++) {
+            if ($.cookie('qrPosition' + i) == checkMatch) {
+                alert('이미 찾은 문자입니다.\n다른 QR을 찍어주세요.');
+                return false;
+            }
+        }
+
+        alert('새로운 문자를 찾았습니다.');
+        $.cookie('qrPosition' + qrPosition, checkMatch);
+        location.href = 'quizword.html';
     }
 </script>
