@@ -40,7 +40,7 @@
     });
 
     function confirmQuiz() {
-        $.cookie('quiz06', true);
+        $.cookie('quiz06', true, { expires : 1 });
         location.href = 'quizpass01.html';
     }
 

@@ -29,7 +29,8 @@
             <area target="_self" href="javascript:void(0);" onclick="checkPosition(13);" coords="792,1608,912,1726" shape="rect" />
             <area target="_self" href="javascript:void(0);" onclick="checkPosition(14);" coords="506,1697,624,1818" shape="rect" />
 
-            <area target="_self" href="javascript:void(0);" onclick="initCookie();" coords="422,157,626,320" shape="rect /">
+            <area target="_self" alt="" href="javascript:void(0);" onclick="gift();" coords="432,165,627,347" shape="rect">
+            <area target="_self" href="javascript:void(0);" onclick="initCookie();" coords="919,257,992,335" shape="rect /">
 
             <area target="_self" href="javascript:void(0);" onclick="quizWord(1);" coords="46,519,228,582" shape="rect" />
             <area target="_self" href="javascript:void(0);" onclick="quizWord(2);" coords="265,519,388,582" shape="rect" />
@@ -105,7 +106,7 @@
         if (!checkAllWord) {
             $('#quizWordImg').after(
             '<div style="position: absolute; top: 20%; left: 3%; background-color: #f9f9c5; width: 95%; height: 13%; font-size: 4.5vw">' +
-            '<p>각 자물쇠를 클릭하고 책표지 QR을 스캔하여</p><p style="margin-top: -20px;">끝말을 획득하세요.</p>' +
+            '<p>각 자물쇠를 클릭한 후 책표지 QR을 스캔하여</p><p style="margin-top: -20px;">끝말을 획득하세요.</p>' +
             '</div>'
             );
         } else {
@@ -120,6 +121,14 @@
 
             if (!checkAllWord) {
                 alert('찾은 끝말을 이어 하나의 문장으로 만들어주세요.');
+            } else {
+                if ($.cookie('gift')) {
+                    $('#quizWordImg').after(
+                        '<img src="img/confirmStamp.png" style="position: absolute; top: 8%; left: 41%; width: 18%;">'
+                    );
+                } else {
+                    alert('축하합니다.\n이제 18번 이벤트 부스로 가서 화면을 인증한 후 선물을 받으세요.');
+                }
             }
         }
     }
@@ -133,7 +142,7 @@
             1: () => {
                 let input1 = prompt("가운데 글자 '서'를 포함하여 3글자 단어를 입력해주세요.", "");
                 if (input1 == '도서관') {
-                    $.cookie('quizWord1', true);
+                    $.cookie('quizWord1', true, { expires : 1 });
                     alert('정답입니다.');
                     return true;
                 } else {
@@ -144,7 +153,7 @@
             2: () => {
                 let input2 = prompt("2글자 단어를 입력해주세요.", "");
                 if (input2 == '지식') {
-                    $.cookie('quizWord2', true);
+                    $.cookie('quizWord2', true, { expires : 1 });
                     alert('정답입니다.');
                     return true;
                 } else {
@@ -155,7 +164,7 @@
             3: () => {
                 let input3 = prompt("첫글자 '문'을 포함하여 2글자 단어를 입력해주세요.", "");
                 if (input3 == '문화') {
-                    $.cookie('quizWord3', true);
+                    $.cookie('quizWord3', true, { expires : 1 });
                     alert('정답입니다.');
                     return true;
                 } else {
@@ -166,7 +175,7 @@
             4: () => {
                 let input4 = prompt("가운데 글자 '경'을 포함하여 3글자 단어를 입력해주세요.", "");
                 if (input4 == '환경을') {
-                    $.cookie('quizWord4', true);
+                    $.cookie('quizWord4', true, { expires : 1 });
                     alert('정답입니다.');
                     return true;
                 } else {
@@ -175,9 +184,9 @@
                 }
             },
             5: () => {
-                let input5 = prompt("2글자 단어를 입력해주세요.", "");
+                let input5 = prompt("첫글자 '서'를 포함하여 2글자 단어를 입력해주세요.", "");
                 if (input5 == '서로') {
-                    $.cookie('quizWord5', true);
+                    $.cookie('quizWord5', true, { expires : 1 });
                     alert('정답입니다.');
                     return true;
                 } else {
@@ -188,7 +197,7 @@
             6: () => {
                 let input6 = prompt("2글자 단어를 입력해주세요.", "");
                 if (input6 == '잇다') {
-                    $.cookie('quizWord6', true);
+                    $.cookie('quizWord6', true, { expires : 1 });
                     alert('정답입니다.');
                     return true;
                 } else {
@@ -229,6 +238,20 @@
         }
     }
 
+    function gift() {
+        let checkAllQuiz = true;
+        for (let i = 1; i < 7; i++) {
+            if (!$.cookie('quizWord' + i)) {
+                checkAllQuiz = false;
+            }
+        }
+
+        if (checkAllQuiz) {
+            $.cookie('gift', true, { expires : 1 });
+            location.href = 'quizword.html';
+        }
+    }
+
     function initCookie() {
         for (let i = 1; i < 15; i++) {
             $.removeCookie('qrPosition' + i)
@@ -237,6 +260,8 @@
         for (let i = 1; i < 7; i++) {
             $.removeCookie('quizWord' + i)
         }
+
+        $.removeCookie('gift');
 
         location.href = 'quizword.html';
     }

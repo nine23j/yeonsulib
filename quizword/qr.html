@@ -139,13 +139,13 @@
 
         for (let i = 1; i < 15; i++) {
             if ($.cookie('qrPosition' + i) == checkMatch) {
-                alert('이미 찾은 문자입니다.\n다른 QR을 찍어주세요.');
+                alert('이미 찾은 책 표지입니다.\n다른 QR을 찍어주세요.');
                 return false;
             }
         }
 
         alert('새로운 문자를 찾았습니다.');
-        $.cookie('qrPosition' + qrPosition, checkMatch);
+        $.cookie('qrPosition' + qrPosition, checkMatch, { expires : 1 });
         location.href = 'quizword.html';
     }
 </script>

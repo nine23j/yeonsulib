@@ -82,7 +82,7 @@
         }
 
         if (isExistLib01 && isExistLib02 && isExistLib03) {
-            $.cookie('quiz01', true);
+            $.cookie('quiz01', true, { expires : 1 });
             alert('축하합니다. 다음 단계로 도전하세요.');
             location.href = 'escapelib.html';
         }

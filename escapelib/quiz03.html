@@ -39,7 +39,7 @@
 
     function checkQuiz() {
         if ($('#input01').val() == 5) {
-            $.cookie('quiz03', true);
+            $.cookie('quiz03', true, { expires : 1 });
             alert('축하합니다. 다음 단계로 도전하세요.');
             location.href = 'escapelib.html';
         } else if(!$('#input01').val()) {
